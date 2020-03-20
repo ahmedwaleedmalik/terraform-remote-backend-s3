@@ -5,7 +5,7 @@ resource "aws_iam_user" "user" {
 
 # Access/Secret key for user
 resource "aws_iam_access_key" "user_keys" {
-  user = "${aws_iam_user.user.name}"
+  user = aws_iam_user.user.name
 }
 
 # S3 Bucket to hold terraform state
@@ -15,7 +15,7 @@ resource "aws_s3_bucket" "terraform-state-storage-s3" {
     enabled = var.bucket_versioning
   }
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
   tags = {
     Name = "Terraform state store on S3"
@@ -75,8 +75,8 @@ EOF
 
 # Attaching the policies with the user.
 resource "aws_iam_user_policy_attachment" "user_policy_attachment" {
-  user       = "${aws_iam_user.user.name}"
-  policy_arn = "${aws_iam_policy.user_policy.arn}"
+  user       = aws_iam_user.user.name
+  policy_arn = aws_iam_policy.user_policy.arn
 }
 
 # Create remote backend resource from template

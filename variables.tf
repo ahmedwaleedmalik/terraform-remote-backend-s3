@@ -1,6 +1,6 @@
 // Name of S3 Bucket
 variable "bucket_name" {
-  description = "S3 bucket that will be used to store terraform state"
+  description = "S3 bucket that will be used to store terraform state, value should be unique"
   default     = "terraform-state-store-w3qrt"
 }
 
@@ -11,7 +11,7 @@ variable "bucket_versioning" {
 
 // Name of DynamoDB Table
 variable "dynamodb_table_name" {
-  description = "DynamoDB table that will be used to store state lock"
+  description = "DynamoDB table that will be used to store state lock, value should be unique"
   default     = "terraform-state-lock-w3qrt"
 }
 
