@@ -19,7 +19,7 @@ required to create a user, S3 bucket and a dynamoDB table.
 | path_to_tfstate | Path to terraform.tfstate file| string | terraform.tfstate | yes |
 | aws_region | Region for AWS| string | eu-west-1 | yes |
 
-*NOTE:* bucket_name and must should be unique
+*NOTE:* bucket_name and dynamodb_table_name must should be unique
 
 # Usage
 
