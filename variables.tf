@@ -4,7 +4,7 @@ variable "aws_region" {
   default = "eu-west-1"
 }
 
-// AWS region
+// Name of AWS user
 variable "aws_user_name" {
   description = "User to be created that will be responsible for managing remote backend"
 }
