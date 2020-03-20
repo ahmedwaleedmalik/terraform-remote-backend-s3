@@ -1,10 +1,22 @@
 # terraform-remote-backend-s3
-A concise example of setting up remote backend on s3 for terraform.
+A terraform module to provision remote backend on s3. It will create `S3 bucket` for storing terraform state, `dynamoDB table` 
+for maintaining lock on terraform state and a restricted `user` that will only have access to the S3 bucket and dynamoDB table.
+
 
 # Pre-requisites
 
 1. An AWS user with following Policies attached `IAMFullAccess`, `AmazonS3FullAccess` and `AmazonDynamoDBFullAccess`, 
 required to create a user, S3 bucket and a dynamoDB table.
+
+# Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| bucket_name | Name of the S3 bucket for state storage| string | - | yes |
+| bucket_versioning | Enable bucket versioning | boolean | true | yes |
+| dynamodb_table_name | Name of dynamoDB table for state lock| string | - | yes |
+| path_to_tfstate | Path to terraform.tfstate file| string | terraform.tfstate | yes |
+| aws_region | Region for AWS| string | eu-west-1 | yes |
 
 # Usage
 
