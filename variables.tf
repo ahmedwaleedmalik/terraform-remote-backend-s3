@@ -6,6 +6,7 @@ variable "bucket_name" {
 
 // Enable versioning
 variable "bucket_versioning" {
+  description = "Enable S3 bucket versioning"
   default = true
 }
 
@@ -17,6 +18,7 @@ variable "dynamodb_table_name" {
 
 // AWS region
 variable "aws_region" {
+  description = "AWS region"
   default = "eu-west-1"
 }
 

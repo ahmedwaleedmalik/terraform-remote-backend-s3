@@ -55,7 +55,7 @@ resource "aws_iam_policy" "user_policy" {
         "${aws_s3_bucket.terraform-state-storage-s3.arn}",
         "${aws_s3_bucket.terraform-state-storage-s3.arn}/*"
       ]
-    }
+    },
     {
       "Effect": "Allow",
       "Action": [
