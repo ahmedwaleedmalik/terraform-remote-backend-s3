@@ -1,6 +1,6 @@
 # User that will only be able to access s3 bucket and dynamoDB table
 resource "aws_iam_user" "user" {
-  name = "user_${var.bucket_name}"
+  name = var.aws_user_name
 }
 
 # Access/Secret key for user
@@ -39,7 +39,7 @@ resource "aws_dynamodb_table" "dynamodb-terraform-state-lock" {
 
 # Creating policies for the user.
 resource "aws_iam_policy" "user_policy" {
-  name   = "RemoteBackendAccessPolicy"
+  name   = "RemoteBackendAccessPolicy_${var.aws_user_name}"
   policy = <<EOF
 {
   "Version": "2012-10-17",

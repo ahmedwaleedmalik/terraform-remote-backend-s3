@@ -12,11 +12,14 @@ required to create a user, S3 bucket and a dynamoDB table.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
+| aws_user_name | Name of user to be created| string | - | yes |
 | bucket_name | Name of the S3 bucket for state storage| string | - | yes |
 | bucket_versioning | Enable bucket versioning | boolean | true | yes |
 | dynamodb_table_name | Name of dynamoDB table for state lock| string | - | yes |
 | path_to_tfstate | Path to terraform.tfstate file| string | terraform.tfstate | yes |
 | aws_region | Region for AWS| string | eu-west-1 | yes |
+
+*NOTE:* bucket_name and must should be unique
 
 # Usage
 
@@ -25,6 +28,7 @@ module "terraform_remote_backend" {
   source = "github.com/ahmedwaleedmalik/terraform-remote-backend-s3?ref=master"
 
   aws_region = "eu-west-1"
+  aws_user_name = "terraform-state-user"
   bucket_name = "terraform-state-store"
   bucket_versioning = true
   dynamodb_table_name = "terraform-state-lock"
