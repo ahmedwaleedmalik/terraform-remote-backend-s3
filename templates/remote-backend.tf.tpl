@@ -1,4 +1,3 @@
-# Note: Variables are not allowed in backend config
 terraform {
   backend "s3" {
     access_key     = "${rb_user_access_key}"
