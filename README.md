@@ -1,19 +1,41 @@
 # terraform-remote-backend-s3
-A concise example of setting up remote backend on s3 for terraform.
+A terraform module to provision remote backend on s3. It will create `S3 bucket` for storing terraform state, `dynamoDB table` 
+for maintaining lock on terraform state and a restricted `user` that will only have access to the S3 bucket and dynamoDB table.
+
 
 # Pre-requisites
 
-1. Create a user with following Policies attached `AmazonS3FullAccess` and `AmazonDynamoDBFullAccess`, for demonstration purposes
-2. Pass credentials in provider.tf and remote-backend.tf
+1. An AWS user with following Policies attached `IAMFullAccess`, `AmazonS3FullAccess` and `AmazonDynamoDBFullAccess`, 
+required to create a user, S3 bucket and a dynamoDB table.
+
+# Inputs
+
+| Name | Description | Type | Default | Required |
+|------|-------------|:----:|:-----:|:-----:|
+| bucket_name | Name of the S3 bucket for state storage| string | - | yes |
+| bucket_versioning | Enable bucket versioning | boolean | true | yes |
+| dynamodb_table_name | Name of dynamoDB table for state lock| string | - | yes |
+| path_to_tfstate | Path to terraform.tfstate file| string | terraform.tfstate | yes |
+| aws_region | Region for AWS| string | eu-west-1 | yes |
 
 # Usage
 
-Run `terraform init`, followed by `terraform plan` to review the changes required to meet desired state and 
+```hcl
+module "terraform_remote_backend" {
+  source = "github.com/ahmedwaleedmalik/terraform-remote-backend-s3?ref=master"
+
+  aws_region = "eu-west-1"
+  bucket_name = "terraform-state-store"
+  bucket_versioning = true
+  dynamodb_table_name = "terraform-state-lock"
+  path_to_tfstate = "terraform.tfstate"
+}
+```
+
+1. Run `terraform init`, followed by `terraform plan` to review the changes required to meet desired state and 
 `terraform apply` to apply those changes.
-
-# TODO
-
-1. Create new user at end that only has access to the created s3 bucket and dynamoDB table and use that in `remote-backend.tf`
+2. It will output a file `remote-backend.tf` this can be used to remotely manage terraform state
+3. Run `terraform init`(mandatory) for terraform to detect and install relevant plugins and start using remote backend for state
 
 # Useful Resources
 
