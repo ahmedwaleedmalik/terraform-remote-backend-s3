@@ -25,7 +25,7 @@ required to create a user, S3 bucket and a dynamoDB table.
 
 ```hcl
 module "terraform_remote_backend" {
-  source = "github.com/ahmedwaleedmalik/terraform-remote-backend-s3?ref=master"
+  source = "github.com/ahmedwaleedmalik/terraform-remote-backend-s3?ref=v1.0.0"
 
   aws_region = "eu-west-1"
   aws_user_name = "terraform-state-user"
